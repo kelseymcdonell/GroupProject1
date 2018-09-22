@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/style.css">
+ 
+  <!--Favicon Links-->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon_package_v0.16/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon_package_v0.16/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon_package_v0.16/favicon-16x16.png">
+  <link rel="manifest" href="assets/images/favicon_package_v0.16/site.webmanifest">
+  <link rel="mask-icon" href="assets/images/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <!--Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+
+  <!--Javascript and JQuery-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="questions.js"></script>
+</head>
+
+<body>
+
+  <!--full length page Nav Barwith Search, and randomize-->
+  <nav class="light-blue accent-4" role="navigation">
+    <div class="nav-wrapper container">
+        <span><img style="height: 65px; padding: 7px;" src="assets/images/food_icon_1499917661.png" alt=""></span>
+      <a href="index.html" class="brand-logo" id="logoNav">Food Finder</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+        <div class="nav-wrapper">
+          <form>
+            <div class="row">
+              <div class="input-field col s4">
+                <input id="userName" type="text" class="validate" style="color: azure">
+                <label for="userName" style="color: azure">Your Name</label>
+              </div>
+              <div class="input-field col s4">
+                <input id="userEmail" type="email" class="validate" style="color: azure">
+                <label for="userEmail" style="color: azure">Email</label>
+              </div>
+              <button class="btn waves-effect waves-light deep-orange" type="submit" id="usersubmit">Log User</button>
+            </div>
+          </form>
+        </div>
+      </ul>
+    </div>
+  </nav>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br>
+      <br>
+      <h1 class="header center deep-orange-text">Hungry?</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">A modern approach to choosing a recipe.</h5>
+      </div>
+      
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content center-align">
+            <div class="row">
+                <div class="col s12 m12">
+                  <div class="card light-blue darken-4">
+                <div class="card-content white-text">
+                  <span class="card-title" id="question">Card Title</span>
+
+                </div>
+                <div class="card-action" id="buttons-view">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-success" role="alert">
+            <button type="button" class="btn-large waves-effect waves-light light-blue darken-4" id='next-question'>If N/A, Next Question!</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section">
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text text-darken-4">
+              <i class="material-icons">videogame_asset</i>
+            </h2>
+            <h5 class="center">Take A Quiz</h5>
+
+            <p class="center light">For when making decisions is just asking too much.</p>
+            <br>
+          <!-- Modal Trigger -->
+      <div class="center">
+        <a class="waves-effect waves-light btn modal-trigger light-blue darken-4" href="#modal1">Start Quiz</a>
+      </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text text-darken-4">
+              <i class="material-icons">restaurant</i>
+            </h2>
+            <h5 class="center">Search Recipes</h5>
+
+            <p class="center light">For the people that know what they want.</p>
+            <br>
+            <nav class="z-depth-1" id="search">
+              <div class="nav-wrapper">
+                <form>
+                  <div class="input-field deep-orange accent-2">
+                    <input placeholder="Search for a recipe!" id="searchTerms" type="search" required>
+                    <label class="label-icon" for="search">
+                      <i class="material-icons">search</i>
+                    </label>
+                    <i class="material-icons">close</i>
+                  </div>
+                  <div class="center">
+                      <a class="waves-effect waves-light btn modal-trigger light-blue darken-4" id="searchSubmit" href="#modal2">Search</a>
+                    </div>
+                </form>
+              </div>
+            </nav>
+            <a href=""></a>
+          </div>
+        </div>
+
+        <!-- Modal Structure 2 -->
+      <div id="modal2" class="modal">
+          <div class="modal-content center-align">
+                    <span class="card-title" id="recipe-view"></span>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text text-darken-4"><i class="material-icons">toys</i></h2>
+            <h5 class="center">Randomize!</h5>
+            <p class="center light">For those times when you just don't give a f***.</p>
+            <br>
+            <div class="center">
+                <a class="waves-effect waves-light btn modal-trigger light-blue darken-4" id="randomize" href="#modal3">Randomize</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+       <!-- Modal Structure 3 -->
+       <div id="modal3" class="modal">
+          <div class="modal-content">   
+                    <span class="card-title" id="randomize-view"></span> 
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
+
+    <br>
+    <br>
+  </div>
+  <footer class="page-footer light-blue accent-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of web developers working on this desperately needed app to save people from the arduous decision of having to pick what to eat. </p>
+        </div>
+        <!-- <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li>
+              <a class="white-text" href="#!">Link 1</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 2</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 3</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div> -->
+        <!-- <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li>
+              <a class="white-text" href="#!">Link 1</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 2</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 3</a>
+            </li>
+            <li>
+              <a class="white-text" href="#!">Link 4</a>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+    <!-- <div class="footer-copyright">
+      <div class="container">
+        Made by
+        <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div> -->
+  </footer>
+  <!--  Scripts-->
+  <script type="text/javascript" src="app.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+ <!-- Modal Trigger -->
+  </body>
+</html>
+   

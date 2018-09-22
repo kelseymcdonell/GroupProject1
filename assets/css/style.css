@@ -1,0 +1,11 @@
+#search{
+    border: none;
+    box-shadow: none;
+}
+
+body{
+    background-image: URL("../images/background6.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
